@@ -9,7 +9,11 @@ semaphore = threading.BoundedSemaphore(2)
 
 def access_resource(thread_id):
     print(f"Поток {thread_id} пытается занять слот...")
-    with semaphore: # вместо acquire -> release, если использовать контекстный менеджер, то без проблем можно использовать и обычный семафор
+    with semaphore:
+        # вместо acquire -> release, если использовать контекстный менеджер,
+        # то без проблем можно использовать и обычный семафор,
+        # а вот если используется acquire и release вне контекстного менеджера,
+        # то лучше использовать BoundedSemaphore для исключения проблем с количеством потоков в слотах
         print(f"Поток {thread_id} вошел в критическую секцию.")
         time.sleep(2)
         print(f"Поток {thread_id} освободил слот.")
