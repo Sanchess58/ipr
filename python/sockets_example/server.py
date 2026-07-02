@@ -12,9 +12,8 @@ conn, address = server_socket.accept()
 print(f"Подключение установлено с {address}")
 
 data = conn.recv(MAX_BUFFER_SIZE)
-print(f"Получено сообщение: {data.decode('utf-8')}")
 
-conn.send(data="b")
+conn.send(b"b")
 
 conn.close()
 server_socket.close()
